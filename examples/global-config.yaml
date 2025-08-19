@@ -1,0 +1,63 @@
+# Example global configuration file
+# Location: ~/.config/cc-status-line/config.yaml
+# 
+# This file contains user-wide defaults and reusable templates
+
+version: "1.0.0"
+
+# Global output preferences (can be overridden per project)
+output_format:
+  colors: true
+  multiline: true
+  compact: false
+  show_changes: true
+
+# System monitoring (disabled for Claude Code compatibility)
+system_monitoring:
+  enabled: false
+  battery: false
+  cpu: false
+  memory: false
+
+# Reusable server templates using YAML anchors
+server_templates:
+  python: &python
+    name: "Python"
+    ports: [8000, 5000]
+    emoji: "🐍"
+    patterns: ["*.py", "requirements.txt", "pyproject.toml"]
+    
+  nodejs: &nodejs
+    name: "Node.js"
+    ports: [3000, 8080]
+    emoji: "🟢"
+    patterns: ["package.json", "node_modules/"]
+    
+  web: &web
+    name: "Web"
+    ports: [8080, 3000, 5173]
+    emoji: "🌐"
+    patterns: ["index.html", "*.css", "*.js"]
+    
+  docker: &docker
+    name: "Docker"
+    ports: [80, 443, 8080]
+    emoji: "🐳"
+    patterns: ["docker-compose.yml", "Dockerfile"]
+
+# Project type templates
+project_templates:
+  single_repo: &single_repo
+    type: "single"
+    repositories:
+      - name: "MAIN"
+        path: "."
+        type: "main"
+        
+  monolith: &monolith
+    type: "monolith"
+    repositories:
+      - name: "MAIN"
+        path: "."
+        type: "main"
+      # Submodules will be detected automatically

@@ -1,0 +1,32 @@
+# Example local configuration file
+# Location: .cc-status-line.yaml (in project root)
+# 
+# This file contains worktree-specific or personal overrides
+# Can be git-ignored for personal preferences or tracked for team sharing
+
+# Override server ports for this specific worktree/environment
+servers:
+  - name: "Node.js"
+    ports: [3001]  # Different port to avoid conflicts
+    emoji: "🟢"
+  - name: "Python"  
+    ports: [8001]   # Different port for this environment
+
+# Personal output preferences (if git-ignored)
+output_format:
+  colors: false     # Maybe this developer prefers no colors
+  multiline: false  # Prefer single-line output
+
+# Environment-specific settings
+system_monitoring:
+  enabled: true     # Enable for this specific environment
+  battery: true
+  cpu: true
+  memory: false
+  
+# Additional servers for this environment
+servers:
+  - name: "Redis"
+    ports: [6379]
+    emoji: "🔴"
+    enabled: true

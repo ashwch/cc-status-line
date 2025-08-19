@@ -1,0 +1,37 @@
+# Example project configuration file
+# Location: ~/.config/cc-status-line/projects/github-com-user-myproject.yaml
+# 
+# This file contains project-specific settings
+
+name: "my-web-app"
+type: "single"
+root_path: "/path/to/project"
+
+# Repository configuration
+repositories:
+  - name: "WEBAPP"
+    path: "."
+    type: "main"
+
+# Server configuration
+servers:
+  - name: "Node.js"
+    ports: [3000]
+    emoji: "🟢"
+    patterns: ["package.json", "node_modules/"]
+    enabled: true
+  - name: "Python"
+    ports: [8000]
+    emoji: "🐍" 
+    patterns: ["*.py", "requirements.txt"]
+    enabled: true
+    
+# Project-specific output preferences
+output_format:
+  multiline: true
+  compact: false
+  show_changes: true
+
+# Timestamps
+created_at: "2025-01-19 10:00:00"
+updated_at: "2025-01-19 10:00:00"

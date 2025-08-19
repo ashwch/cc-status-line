@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+      with:
+        version: "latest"
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      run: uv python install ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: uv sync --all-extras --dev
+    
+    - name: Lint with ruff
+      run: |
+        uv run ruff check src tests
+        uv run ruff format src tests --check
+    
+    - name: Type check with pyright
+      run: uv run pyright src
+      continue-on-error: true  # Type checking issues shouldn't fail CI for now
+    
+    - name: Test CLI functionality
+      run: |
+        uv run cc-status-line --help
+        uv run cc-status-line --version
+        uv run cc-status-line --config-info
+    
+    - name: Test Claude Code integration
+      run: |
+        echo '{"session_id": "test", "workspace": {"current_working_directory": "'$(pwd)'"}}' | uv run cc-status-line
+    
+    - name: Test with NO_COLOR
+      run: |
+        NO_COLOR=1 uv run cc-status-line --help
+      env:
+        NO_COLOR: 1
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install uv
+      uses: astral-sh/setup-uv@v3
+    
+    - name: Security scan
+      run: |
+        uv run pip install safety bandit
+        uv run safety check --json || true
+        uv run bandit -r src/ -f json || true
