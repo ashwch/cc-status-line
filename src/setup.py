@@ -43,6 +43,9 @@ class SetupWizard:
         # Configure system monitoring
         system_monitoring = self._configure_system_monitoring()
 
+        # Configure Claude Code integration
+        self._configure_claude_code()
+
         # Create config dictionary
         config = {
             "name": name,
@@ -200,3 +203,69 @@ class SetupWizard:
         enabled = click.confirm("Enable system monitoring?", default=False)
 
         return {"enabled": enabled, "battery": enabled, "cpu": enabled, "memory": enabled}
+
+    def _configure_claude_code(self) -> None:
+        """Configure Claude Code integration."""
+        import json
+        from pathlib import Path
+
+        click.echo("\n⚡ Claude Code Integration")
+        click.echo("💡 You can also run '/statusline' command in Claude Code for interactive setup")
+
+        setup_claude = click.confirm("Set up Claude Code status line integration?", default=True)
+        if not setup_claude:
+            click.echo("👍 Skipping Claude Code setup")
+            return
+
+        # Find or create Claude Code settings
+        claude_settings_paths = [
+            Path.cwd() / ".claude" / "settings.json",  # Project-specific
+            Path.home() / ".claude" / "settings.json",  # Global
+        ]
+
+        # Try to find existing settings
+        existing_settings = None
+        settings_path = None
+
+        for path in claude_settings_paths:
+            if path.exists():
+                try:
+                    with open(path) as f:
+                        existing_settings = json.load(f)
+                    settings_path = path
+                    click.echo(f"📁 Found existing Claude Code settings: {path}")
+                    break
+                except (OSError, json.JSONDecodeError):
+                    continue
+
+        if not settings_path:
+            # Ask where to create settings
+            use_local = click.confirm("Create project-specific Claude Code settings?", default=True)
+            if use_local:
+                settings_path = claude_settings_paths[0]
+                settings_path.parent.mkdir(exist_ok=True)
+            else:
+                settings_path = claude_settings_paths[1]
+                settings_path.parent.mkdir(exist_ok=True)
+
+        # Prepare new settings
+        if existing_settings is None:
+            existing_settings = {}
+
+        # Configure status line
+        command = "uvx --from git+https://github.com/ashwch/cc-status-line cc-status-line"
+        existing_settings["statusLine"] = {"type": "command", "command": command, "padding": 0}
+
+        # Save settings
+        try:
+            with open(settings_path, "w") as f:
+                json.dump(existing_settings, f, indent=2)
+            click.echo(f"✅ Claude Code settings saved to: {settings_path}")
+            click.echo("🚀 Claude Code status line is now configured!")
+            click.echo("\n💡 Restart Claude Code to see the new status line")
+        except OSError as e:
+            click.echo(f"❌ Failed to save Claude Code settings: {e}")
+            click.echo(f"💡 Manually add this to {settings_path}:")
+            click.echo(
+                json.dumps({"statusLine": {"type": "command", "command": command}}, indent=2)
+            )
