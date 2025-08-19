@@ -1,9 +1,8 @@
 """
-CC Status Line - Universal, configurable development environment status line.
+CC Status Line - Claude Code status line tool for development environments.
 
-A flexible, project-agnostic status line tool that adapts to any development environment.
-Supports interactive configuration, project-specific settings, and works with monoliths,
-single repositories, and custom project structures.
+A specialized status line tool designed for Claude Code's status line feature.
+Displays git repositories, development servers, and project status directly in Claude Code.
 """
 
 __version__ = "1.0.0"

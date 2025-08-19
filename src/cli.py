@@ -53,7 +53,7 @@ def main(
     global_config,
     config_dir,
 ):
-    """CC Status Line - Universal, configurable development environment status display."""
+    """CC Status Line - Claude Code status line tool with git repositories and development server detection."""
 
     config_manager = ConfigManager(custom_config_dir=config_dir)
 

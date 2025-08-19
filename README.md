@@ -1,8 +1,8 @@
 # CC Status Line
 
-**Universal status line tool designed specifically for Claude Code**
+**Status line tool designed specifically for Claude Code**
 
-A flexible, project-agnostic status line tool built specifically for [Claude Code's status line feature](https://docs.anthropic.com/en/docs/claude-code/statusline). Provides real-time development environment status directly in your Claude Code interface.
+A specialized status line tool built specifically for [Claude Code's status line feature](https://docs.anthropic.com/en/docs/claude-code/statusline). Provides real-time development environment status directly in your Claude Code interface.
 
 > **Note**: This tool is specifically designed for Claude Code integration and optimized for the Claude Code status line display system.
 

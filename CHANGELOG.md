@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - JSON stdin handling for Claude Code context
   - Workspace directory detection from Claude context
   - Optimized error messages for status line display
-- **Universal Configuration System**: Layered YAML configuration (Global → Project → Local)
+- **Claude Code Configuration System**: Layered YAML configuration (Global → Project → Local)
 - **Cross-Platform Support**: Windows, macOS, and Linux compatibility
 - **Git Repository Tracking**: Multi-repository status with branch tracking and commit behind detection
 - **Server Detection**: Automatic discovery of development servers

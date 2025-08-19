@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**CC Status Line** is a universal, configurable development environment status line tool written in Python specifically designed for [Claude Code's status line feature](https://docs.anthropic.com/en/docs/claude-code/statusline). It provides real-time status information about git repositories, running development servers, and project health directly within the Claude Code interface.
+**CC Status Line** is a specialized development environment status line tool written in Python specifically designed for [Claude Code's status line feature](https://docs.anthropic.com/en/docs/claude-code/statusline). It provides real-time status information about git repositories, running development servers, and project health directly within the Claude Code interface.
 
 **🎯 Purpose**: This tool is exclusively designed for Claude Code integration and optimized for the Claude Code status line display system.
 
@@ -10,7 +10,7 @@
 
 - **🎯 Claude Code Optimized**: Specifically designed for Claude Code status line integration
 - **🔄 Real-time Updates**: Efficient status updates that work with Claude Code's refresh cycle
-- **📁 Universal Project Support**: Works with any project type (monolith, single repo, multi-repo, custom)
+- **📁 Claude Code Project Support**: Optimized for Claude Code workspace detection (monolith, single repo, multi-repo, custom)
 - **⚙️ Layered YAML Configuration**: Global → Project → Local override system
 - **🗺️ Cross-Platform**: Windows, macOS, Linux support with proper path handling
 - **🔒 Security-First**: No shell injection vulnerabilities, safe subprocess execution
@@ -343,4 +343,4 @@ Check platform-specific log locations for detailed error information and executi
 
 ---
 
-This tool is designed to be universally applicable across development environments while maintaining security, performance, and ease of use. The modular architecture allows for easy extension and customization based on specific project needs.
+This tool is designed specifically for Claude Code's status line feature while maintaining security, performance, and ease of use. The modular architecture allows for easy extension and customization based on Claude Code integration needs.

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cc-status-line"
 version = "1.0.0"
-description = "Universal, configurable development environment status line"
+description = "Claude Code status line tool with git repositories and development server detection"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
